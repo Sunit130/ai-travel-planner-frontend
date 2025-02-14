@@ -13,7 +13,7 @@ interface CarouselProps {
 
 export default function Carousel({ images }: CarouselProps) {
   return (
-    <div className="carousel-container w-64 sm:w-96 relative">
+    <div className="carousel-container w-80 sm:w-96 relative">
       <Swiper
         modules={[Navigation, Pagination]}
         observer={true}
