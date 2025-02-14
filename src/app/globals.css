@@ -23,3 +23,18 @@ body {
 :root {
   --radius: 8px;
 }
+
+/* Custom Pagination Dots */
+.custom-pagination .swiper-pagination-bullet {
+  background-color: #8BC34A; /* Light green */
+  width: 12px;
+  height: 12px;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  background-color: #7CB342; /* Slightly darker green */
+  opacity: 1;
+  transform: scale(1.2);
+}
