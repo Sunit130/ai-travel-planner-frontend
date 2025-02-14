@@ -26,7 +26,7 @@ export default function GenerateItineraryPage() {
 
     const callGenerateItinerary = async (destination: string, numberOfDays: number, intrests: string[]) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}api/create-itinerary/`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/create-itinerary/`, {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json'
