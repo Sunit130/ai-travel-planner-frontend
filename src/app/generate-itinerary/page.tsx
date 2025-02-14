@@ -17,6 +17,7 @@ export default function GenerateItineraryPage() {
     const [travelTypes, setTravelTypes] = useState<string[]>([TRIPS_TYPE[0]])
     const [isGenerating, setIsGenerating] = useState<boolean>(false)
     const [progress, setProgress] = useState(0)
+    const [errorMsg, setErrorMsg] = useState<string>("")
 
 
     const handleTravelTypeToggle = (type: string) => {
@@ -43,28 +44,47 @@ export default function GenerateItineraryPage() {
             return await res.json();
         } catch (error) {
             console.error("Error fetching itinerary:", error);
+            
             return null;
         }
     }
 
 
     const handleGenerate = async () => {
-        setIsGenerating(true)
-        setProgress(0)
+        setIsGenerating(true);
+        setProgress(0);
+        setErrorMsg("");
+        
         const interval = setInterval(() => {
             setProgress((prev) => {
-                if (prev >= 100) {
-                    clearInterval(interval)
-                    setIsGenerating(false)
-                    return 100
+                if (prev >= 99) {
+                    clearInterval(interval);
+                    return 99;
                 }
-                return prev + 1
-            })
-        }, 250)
-
-        const data = await callGenerateItinerary(destination, days, travelTypes);
-        router.push(`/itinerary/${data.destination_slug}/${data.duration}-days/${data.id}`);
-    }
+                return prev + 1;
+            });
+        }, 300);
+    
+        const timeout = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Request timed out. Please try again later.")), 60000)
+        );
+    
+        try {
+            const data = await Promise.race([
+                callGenerateItinerary(destination, days, travelTypes),
+                timeout
+            ]);
+            setProgress(100);
+            clearInterval(interval);
+            await new Promise(resolve => setTimeout(resolve, 500));
+            router.push(`/itinerary/${data.destination_slug}/${data.duration}-days/${data.id}`);
+        } catch {
+            clearInterval(interval);
+            setIsGenerating(false);
+            setErrorMsg("We are unable to process your request. Please try again in a moment."); // Show error message to the user
+        }
+    };
+    
 
     return (
         <div className="min-h-screen flex flex-col bg-white">
@@ -123,7 +143,7 @@ export default function GenerateItineraryPage() {
                     Generate Itinerary
                 </Button>
             }
-            {isGenerating && (
+            {isGenerating && !errorMsg && (
                 <div className="mt-4">
                 <div className="h-2 w-full bg-emerald-100 rounded-full overflow-hidden">
                     <div
@@ -134,6 +154,11 @@ export default function GenerateItineraryPage() {
                 <p className="text-sm text-center mt-2 text-emerald-800">
                     {progress}% - Crafting your perfect itinerary...
                 </p>
+                </div>
+            )}
+            {errorMsg && (
+                <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
+                    {errorMsg}
                 </div>
             )}
             </div>
