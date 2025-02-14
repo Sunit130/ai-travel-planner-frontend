@@ -183,8 +183,17 @@ export default function HomePage() {
                             ))
                         }
                     </div>
-                    <div className="w-fit ml-auto mt-8 text-emerald-700 text-lg font-bold">
-                        <Link href={'/itineraries'}>Show More {">>"}</Link>
+                    <div className="w-full flex justify-center ml-auto mt-8 text-emerald-700 text-lg font-bold">
+                        <Link
+                            href={'/itineraries'}
+                            className="flex items-center justify-center gap-2 text-sm font-medium"
+                            >
+                            <Button className="flex align-middle justify-center">
+
+                            Show More <ChevronRight className="ml-2" size={20} />
+                            </Button>
+                        </Link>
+                        {/* <Link href={'/itineraries'}>Show More {">>"}</Link> */}
                     </div>
                 </div>
             </section>
