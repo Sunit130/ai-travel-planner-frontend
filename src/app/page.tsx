@@ -63,7 +63,7 @@ export default function HomePage() {
     useEffect(()=>{
       async function fetchItinerariesList(){
         try {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/itineraries?limit=3`, {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}api/itineraries/?limit=3`, {
             cache: "no-store",
           });
       
