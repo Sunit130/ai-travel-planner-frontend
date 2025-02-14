@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  line-height: 1.75;
+  letter-spacing: 0.2px;
+  font-family: "Geist", serif;
+
+}
+
+@layer components {
+  .prose a {
+    @apply text-zinc-900 font-semibold hover:underline;
+  }
+}
+
+.swiper-wrapper {
+  @apply items-center;
+}
+
+:root {
+  --radius: 8px;
+}
