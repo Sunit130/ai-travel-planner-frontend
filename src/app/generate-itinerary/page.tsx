@@ -96,7 +96,7 @@ export default function GenerateItineraryPage() {
                 </div>
                 <div className="flex items-start space-x-2">
                 <Users className="text-emerald-600 mt-1" />
-                <div className="flex-grow">
+                <div className="flex-grow max-w-[352px]">
                     <p className="text-sm font-medium text-gray-700 mb-2">Type of Travel</p>
                     <div className="flex flex-wrap gap-2">
                     {TRIPS_TYPE.map((type) => (

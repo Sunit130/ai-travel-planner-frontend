@@ -1,1 +1,4 @@
-export const TRIPS_TYPE = ["Solo", "Couple", "Family", "Luxury", "Adventure", "Beach", "Roadtrip", "Honeymoon", "Weekend", "Cultural"]
+export const TRIPS_TYPE = [
+  "Adventure", "Exploration", "Nature", "Culture", "Historical",  
+  "Food", "Hiking", "Wildlife", "Sightseeing", "Beach", "Romantic", "Budget"
+];
