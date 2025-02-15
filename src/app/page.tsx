@@ -13,6 +13,7 @@ import {
     ChevronRight,
 } from "lucide-react";
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react"
+import { SkeletonCard } from "@/components/skeleton-card";
 
 interface Itinerary {
   id: number;
@@ -153,34 +154,42 @@ export default function HomePage() {
                         Latest Itineraries 
                     </h2>
                     <div className="grid md:grid-cols-3 gap-8">
-                        {
-                            latestItineraries.map((itinerary: Itinerary, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-white rounded-lg shadow-lg overflow-hidden"
-                                >
-                                    <Image
-                                        src={itinerary.location_image}
-                                        alt={itinerary.location}
-                                        width={400}
-                                        height={400}
-                                        className="w-full h-80 object-cover"
-                                    />
-                                    <div className="p-6">
-                                        <h3 className="text-xl font-semibold mb-2">
-                                            {itinerary.location}
-                                        </h3>
-                                        <p className="text-gray-600 mb-4">
-                                            {itinerary.headline}
-                                        </p>
-                                        <Link href={`itinerary/${itinerary.destination_slug}/${itinerary.duration}-days/${itinerary.id}`}>
-                                            <Button variant="outline">
-                                                View Itinerary
-                                            </Button>
-                                        </Link>
+                        {latestItineraries.length == 0 ? (
+                                [...Array(3)].map((_, index) => (
+                                    <SkeletonCard key={index} />
+                                ))
+                            )
+                            :
+                            <>
+                                {latestItineraries.map((itinerary: Itinerary, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-white rounded-lg shadow-lg overflow-hidden"
+                                    >
+                                        <Image
+                                            src={itinerary.location_image}
+                                            alt={itinerary.location}
+                                            width={400}
+                                            height={400}
+                                            className="w-full h-80 object-cover"
+                                        />
+                                        <div className="p-6">
+                                            <h3 className="text-xl font-semibold mb-2">
+                                                {itinerary.location}
+                                            </h3>
+                                            <p className="text-gray-600 mb-4">
+                                                {itinerary.headline}
+                                            </p>
+                                            <Link href={`itinerary/${itinerary.destination_slug}/${itinerary.duration}-days/${itinerary.id}`}>
+                                                <Button variant="outline">
+                                                    View Itinerary
+                                                </Button>
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
-                            ))
+                                ))}
+                            </> 
+
                         }
                     </div>
                     <div className="w-full flex justify-center ml-auto mt-8 text-emerald-700 text-lg font-bold">

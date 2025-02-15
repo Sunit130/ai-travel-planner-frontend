@@ -14,6 +14,7 @@ import {
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { TRIPS_TYPE } from "../const";
+import { SkeletonCard } from "@/components/skeleton-card";
 
 interface Itinerary {
     id: number;
@@ -25,17 +26,6 @@ interface Itinerary {
     created_at: string;
     interests: string;
 }
-
-const SkeletonCard = () => (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
-        <div className="h-40 bg-gray-300" />
-        <div className="p-4 space-y-2">
-            <div className="h-6 bg-gray-300 rounded w-3/4" />
-            <div className="h-4 bg-gray-300 rounded w-1/2" />
-            <div className="h-4 bg-gray-300 rounded w-1/4" />
-        </div>
-    </div>
-);
 
 const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => (
     <div className="relative mb-4">
