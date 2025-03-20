@@ -12,8 +12,8 @@ import { TRIPS_TYPE } from "../const"
 
 export default function GenerateItineraryPage() {
     const router = useRouter();
-    const [destination, setDestination] = useState<string>("Bangalore")
-    const [days, setDays] = useState<number>(7)
+    const [destination, setDestination] = useState<string>("London")
+    const [days, setDays] = useState<number>(3)
     const [travelTypes, setTravelTypes] = useState<string[]>([TRIPS_TYPE[0]])
     const [isGenerating, setIsGenerating] = useState<boolean>(false)
     const [progress, setProgress] = useState(0)
